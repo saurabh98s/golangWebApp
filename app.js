@@ -35,16 +35,25 @@ class Channel extends React.Component{
 
 class ChannelForm extends React.Component{
     onSubmit(e){
+        let channelName = this.state;
+        console.log(e.target.value);
+        e.preventDefault();
         
     }
     onChange(e){
-        console(e.target.value);
+        
+        this.setState({
+            channelName: e.target.value
+        });
+        //  console.log(e.target.value);
     }
     render(){
         return(
             <form onSubmit={this.onSubmit.bind(this)}>
-                <input type='text'/>
+                <input type='text'
                     onChange={this.onChange.bind(this)}
+
+                    />
 
             </form>
         )
