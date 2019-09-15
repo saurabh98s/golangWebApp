@@ -1,8 +1,3 @@
-let channels = [
-    {name: 'HardWare Support'},
-    {name: 'Software Support'}
-];
-
 class Channel extends React.Component{
     onClick(){
         console.log('I was clicked',this.props.name);
@@ -34,24 +29,36 @@ class Channel extends React.Component{
  }
 
 class ChannelForm extends React.Component{
-    onSubmit(e){
-        let channelName = this.state;
-        console.log(e.target.value);
-        e.preventDefault();
-        
+    constructor(props){
+        super(props);
+        this.state = {};
+
     }
     onChange(e){
-        
         this.setState({
             channelName: e.target.value
         });
-        //  console.log(e.target.value);
+        //   console.log(e.target.value);
     }
+    onSubmit(e){
+        let {channelName} = this.state;
+        console.log(channelName);
+        channels.push({
+            name: channelName
+        });
+        this.setState({
+            channelName: ''
+        });
+        e.preventDefault();
+        
+    }
+   
     render(){
         return(
-            <form onSubmit={this.onSubmit.bind(this)}>
+            <form onSubmit={this.onSubmit.bind(this)}> 
                 <input type='text'
-                    onChange={this.onChange.bind(this)}
+                     onChange={this.onChange.bind(this)}
+                     value={this.state.channelName}
 
                     />
 
@@ -60,6 +67,18 @@ class ChannelForm extends React.Component{
     }
 }
 class ChannelSection extends React.Component{
+    // for storing new array values and rendering them in our channel.
+    constructor(props){
+        super(props);
+        this.state={
+            channels: [
+                {name: 'HardWare Support'},
+                {name: 'Software Support'}
+            ]
+        };
+
+    }
+
     render(){
         return(
             <div>
