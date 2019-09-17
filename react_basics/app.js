@@ -19,7 +19,7 @@ class Channel extends React.Component{
                     )
 
                 })}
-                 </ul>
+            </ul>
 
 
         )
@@ -41,14 +41,16 @@ class ChannelForm extends React.Component{
         //   console.log(e.target.value);
     }
     onSubmit(e){
+        // on submit event handler.
         let {channelName} = this.state;
         console.log(channelName);
-        channels.push({
-            name: channelName
-        });
+        // channels.push({
+        //     name: channelName
+        // });
         this.setState({
             channelName: ''
         });
+        this.props.addChannel(channelName);  
         e.preventDefault();
         
     }
@@ -78,12 +80,19 @@ class ChannelSection extends React.Component{
         };
 
     }
+    addChannel(name){
+        let {channels} = this.state;
+        channel.push({name: name});
+        this.setState({
+            channels: channels
+        });
+    }
 
     render(){
         return(
             <div>
-                <ChannelList channels={channels}/>
-                <ChannelForm/>
+                <ChannelList channels={this.state.channels}/>
+                <ChannelForm addChannel={this.addChannel.bind(this)}/>
             </div>
 
         )
