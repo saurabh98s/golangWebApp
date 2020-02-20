@@ -30,6 +30,7 @@ func main() {
 
 
 func servingMainPage(w http.ResponseWriter, r *http.Request) {
+    
     tmpl := template.Must(template.ParseFiles("mainPage.html"))
         data := TodoPageData{
             PageTitle: "My User List",
