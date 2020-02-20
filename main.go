@@ -23,8 +23,14 @@ type TodoPageData struct {
 
 
 func main() {
+    
+    http.HandleFunc("/",servingMainPage)
+    http.ListenAndServe(":8080", nil)
+}
+
+
+func servingMainPage(w http.ResponseWriter, r *http.Request) {
     tmpl := template.Must(template.ParseFiles("mainPage.html"))
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         data := TodoPageData{
             PageTitle: "My User List",
             Todos: []Todo{
@@ -34,6 +40,4 @@ func main() {
             },
         }
         tmpl.Execute(w, data)
-    })
-    http.ListenAndServe(":8080", nil)
-}
+    }
